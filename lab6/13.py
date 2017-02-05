@@ -5,12 +5,12 @@ from enum import Enum
 
 
 class Country(Enum):
-    Germany = 1
+    Germany = 3
     Cuba = 2
-    Laos = 3
-    Monaco = 4
-    Bangladesh = 5
-    Ukraine = 6
+    Laos = 1
+    Monaco = 3
+    Bangladesh = 1
+    Ukraine = 3
 
 
 class Continent(Enum):
@@ -20,3 +20,4 @@ class Continent(Enum):
 
 
 s = Country[input('Country: ')]
+print(Continent(s.value).name)
