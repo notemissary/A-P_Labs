@@ -5,13 +5,14 @@
 from enum import Enum
 
 
-class measure(Enum):
-    decimetre = 1
-    kilometre = 2
-    metre = 3
-    millimetre = 4
-    centimetre = 5
-
+class Measure(Enum):
+    decimetre = 0.1
+    kilometre = 1000
+    metre = 1
+    millimetre = 0.001
+    centimetre = 0.01
 
 x = float(input('Length: '))
-p = measure[input('Measure: ')]
+p = Measure[input('Measure: ')]
+
+print(x * p.value, 'метров.')
