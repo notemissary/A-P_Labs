@@ -4,7 +4,7 @@
 from enum import Enum
 
 
-class country(Enum):
+class Country(Enum):
     Germany = 1
     Cuba = 2
     Laos = 3
@@ -13,10 +13,10 @@ class country(Enum):
     Ukraine = 6
 
 
-class continent(Enum):
+class Continent(Enum):
     Asia = 1
     America = 2
     Europe = 3
 
 
-s = country[input('Country: ')]
+s = Country[input('Country: ')]
