@@ -12,7 +12,6 @@ class Measure(Enum):
     millimeter = 0.001
     centimeter = 0.01
 
-
 while True:
     try:
         x = float(input('Length: '))
