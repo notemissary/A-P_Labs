@@ -19,5 +19,11 @@ class Continent(Enum):
     Europe = 3
 
 
-s = Country[input('Country: ')]
-print(Continent(s.value).name)
+while True:
+    try:
+        s = Country[input('Country: ')]
+        print(Continent(s.value).name)
+    except KeyError:
+        print('Country has not found.')
+    if input('Press Enter to continue or input something to exit') != '':
+        exit()
