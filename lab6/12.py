@@ -6,13 +6,20 @@ from enum import Enum
 
 
 class Measure(Enum):
-    decimetre = 0.1
-    kilometre = 1000
-    metre = 1
-    millimetre = 0.001
-    centimetre = 0.01
+    decimeter = 0.1
+    kilometer = 1000
+    meter = 1
+    millimeter = 0.001
+    centimeter = 0.01
 
-x = float(input('Length: '))
-p = Measure[input('Measure: ')]
 
-print(x * p.value, 'метров.')
+while True:
+    try:
+        x = float(input('Length: '))
+        p = Measure[input('Measure: ')]
+        print('{} meters.'.format(x * p.value))
+    except (ValueError, KeyError):
+        print('Wrong value or key.')
+        continue
+    if input('Press Enter to continue or input something to exit') != '':
+        exit()
