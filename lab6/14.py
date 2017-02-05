@@ -11,16 +11,24 @@
 color = ['Green', 'Red', 'Yellow', 'White', 'Black']
 animal = ['Rat', 'Cow', 'Tiger', 'Rabbit', 'Dragon', 'Snake', 'Horse',
           'Sheep', 'Monkey', 'Chicken', 'Dog', 'Pig']
-start = -56
-flag = True
-n = int(input())
-while flag:
-    for i in color:
-        for j in animal:
-            if n == start:
-                print(i, j)
-                flag = False
-                break
-            start += 1
-        if flag == False:
-            break
+
+while True:
+    start = -56
+    flag = True
+    try:
+        n = int(input('Input a year: '))
+        while flag:
+            for i in color:
+                for j in animal:
+                    if n == start:
+                        print(i, j)
+                        flag = False
+                        break
+                    start += 1
+                if not flag:
+                    break
+    except ValueError:
+        print('The year must be an integer number!')
+        continue
+    if input('Press Enter to continue or input something to exit') != '':
+        exit()
