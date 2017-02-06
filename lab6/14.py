@@ -10,7 +10,7 @@
 
 color = ['Green', 'Red', 'Yellow', 'White', 'Black']
 animal = ['Rat', 'Cow', 'Tiger', 'Rabbit', 'Dragon', 'Snake', 'Horse',
-          'Sheep', 'Monkey', 'Chicken', 'Dog', 'Pig']
+          'Sheep', 'Monkey', 'Rooster', 'Dog', 'Pig']
 
 while True:
     start = 4
