@@ -18,7 +18,6 @@ class Continent(Enum):
     America = 2
     Europe = 3
 
-
 while True:
     try:
         s = Country[input('Country: ')]
