@@ -54,18 +54,15 @@ while True:
                         print(i.name, Animal(c).name)
                         flag = False
                         break
-                    c += 1
-                    start += 1
-                    if c == 13:
-                        c = 1
-                    if start == year:
-                        print(i.name, Animal(c).name)
+                    elif start + 1 == year:
+                        print(i.name, Animal(c + 1).name)
                         flag = False
                         break
-                    c += 1
-                    start += 1
-                    if c == 13:
-                        c = 1
+                    else:
+                        start += 2
+                        c += 2
+                        if c > 12:
+                            c = 1
     except ValueError:
         print('The year must be an integer number!')
         continue
