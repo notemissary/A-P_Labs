@@ -36,7 +36,7 @@ class Animal(Enum):
 while True:
     start = 4
     try:
-        year = int(input('Input a year: '))
+        year = int(input('Input a year: ')) % 60
         if year == 0:
             print(Color(4).name, Animal(9).name)
         elif year == 1:
