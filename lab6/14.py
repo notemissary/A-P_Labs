@@ -8,37 +8,64 @@
 # Разработать программу, которая вводит номер некоторого года нашей эры и
 # печатает его название по древнеяпонскому календарю.
 
-color = ['Green', 'Red', 'Yellow', 'White', 'Black']
-animal = ['Rat', 'Cow', 'Tiger', 'Rabbit', 'Dragon', 'Snake', 'Horse',
-          'Sheep', 'Monkey', 'Rooster', 'Dog', 'Pig']
+from enum import Enum
+
+
+class Color(Enum):
+    Green = 1
+    Red = 2
+    Yellow = 3
+    White = 4
+    Black = 5
+
+
+class Animal(Enum):
+    Rat = 1
+    Ox = 2
+    Tiger = 3
+    Rabbit = 4
+    Dragon = 5
+    Snake = 6
+    Horse = 7
+    Goat = 8
+    Monkey = 9
+    Rooster = 10
+    Dog = 11
+    Pig = 12
 
 while True:
     start = 4
-    flag = True
     try:
         year = int(input('Input a year: '))
         if year == 0:
-            print(color[-1], animal[-4])
+            print(Color(4).name, Animal(9).name)
         elif year == 1:
-            print(color[-1], animal[-3])
+            print(Color(4).name, Animal(10).name)
         elif year == 2:
-            print(color[-1], animal[-2])
+            print(Color(5).name, Animal(11).name)
         elif year == 3:
-            print(color[-1], animal[-1])
-        elif year in range(4, 2018):
-            while flag:
-                for i in color:
-                    for j in animal:
-                        if year == start:
-                            print(i, j)
-                            flag = False
-                            break
-                        start += 1
-                    if not flag:
-                        break
+            print(Color(5).name, Animal(12).name)
         else:
-            print('Year is out of current era.')
-            continue
+            c = 1
+            flag = True
+            while flag:
+                for i in Color:
+                    if start == year:
+                        print(i.name, Animal(c).name)
+                        flag = False
+                        break
+                    c += 1
+                    start += 1
+                    if c == 13:
+                        c = 1
+                    if start == year:
+                        print(i.name, Animal(c).name)
+                        flag = False
+                        break
+                    c += 1
+                    start += 1
+                    if c == 13:
+                        c = 1
     except ValueError:
         print('The year must be an integer number!')
         continue
