@@ -5,12 +5,12 @@ from enum import Enum
 
 
 class Country(Enum):
-    Germany = 3
+    Germany = 1
     Cuba = 2
-    Laos = 1
-    Monaco = 3
-    Bangladesh = 1
-    Ukraine = 3
+    Laos = 3
+    Monaco = 4
+    Bangladesh = 5
+    Ukraine = 6
 
 
 class Continent(Enum):
@@ -20,8 +20,20 @@ class Continent(Enum):
 
 while True:
     try:
-        s = Country[input('Country: ')]
-        print(Continent(s.value).name)
+        s = Country[input('Country: ')].value
+        if s == 1:
+            continent = Continent(3)
+        elif s == 2:
+            continent = Continent(2)
+        elif s == 3:
+            continent = Continent(1)
+        elif s == 4:
+            continent = Continent(3)
+        elif s == 5:
+            continent = Continent(1)
+        else:
+            continent = Continent(3)
+        print('{}'.format(continent.name))
     except KeyError:
         print('Country has not found.')
     if input('Press Enter to continue or input something to exit') != '':
