@@ -6,17 +6,25 @@ from enum import Enum
 
 
 class Measure(Enum):
-    decimeter = 0.1
-    kilometer = 1000
-    meter = 1
-    millimeter = 0.001
-    centimeter = 0.01
+    decimeter = 1
+    kilometer = 2
+    meter = 3
+    millimeter = 4
+    centimeter = 5
 
 while True:
     try:
         x = float(input('Length: '))
-        p = Measure[input('Measure: ')]
-        print('{} meters.'.format(x * p.value))
+        p = Measure[input('Measure: ')].value
+        if p == 1:
+            x /= 10
+        elif p == 2:
+            x *= 1000
+        elif p == 4:
+            x /= 1000
+        elif p == 5:
+            x /= 100
+        print('{} meters.'.format(x))
     except (ValueError, KeyError):
         print('Wrong value or key.')
         continue
