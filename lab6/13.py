@@ -20,21 +20,16 @@ class Continent(Enum):
 
 while True:
     try:
-        s = Country[input('Country: ')].value
-        if s == 1:
-            continent = Continent(3)
-        elif s == 2:
+        s = Country[input('Country: ')].name
+        if s in ('Laos', 'Bangladesh'):
+            continent = Continent(1)
+        elif s is 'Cuba':
             continent = Continent(2)
-        elif s == 3:
-            continent = Continent(1)
-        elif s == 4:
-            continent = Continent(3)
-        elif s == 5:
-            continent = Continent(1)
         else:
             continent = Continent(3)
         print('{}'.format(continent.name))
     except KeyError:
         print('Country has not found.')
-    if input('Press Enter to continue or input something to exit') != '':
+        continue
+    if input('Press Enter to continue or input something to exit... ') != '':
         exit()
