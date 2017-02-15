@@ -15,14 +15,14 @@ class Measure(Enum):
 while True:
     try:
         x = float(input('Length: '))
-        p = Measure[input('Measure: ')].name
-        if p == 'decimeter':
+        p = Measure[input('Measure: ')]
+        if p == Measure.decimeter:
             x /= 10
-        elif p == 'kilometer':
+        elif p == Measure.kilometer:
             x *= 1000
-        elif p == 'millimeter':
+        elif p == Measure.millimeter:
             x /= 1000
-        elif p == 'centimeter':
+        elif p == Measure.centimeter:
             x /= 100
         print('{} meters.'.format(x))
     except (ValueError, KeyError):

@@ -20,10 +20,10 @@ class Continent(Enum):
 
 while True:
     try:
-        s = Country[input('Country: ')].name
-        if s in ('Laos', 'Bangladesh'):
+        s = Country[input('Country: ')]
+        if s in (Country.Laos, Country.Bangladesh):
             continent = Continent(1)
-        elif s is 'Cuba':
+        elif s is Country.Cuba:
             continent = Continent(2)
         else:
             continent = Continent(3)
