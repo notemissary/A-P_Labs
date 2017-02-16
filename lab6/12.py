@@ -15,7 +15,8 @@ class Measure(Enum):
 while True:
     try:
         x = float(input('Length: '))
-        p = Measure[input('Measure: ')]
+        p = Measure[input('Measure[Decimeter, kilometer, meter, millimeter, '
+                          'centimeter]: ').lower()]
         if p == Measure.decimeter:
             x /= 10
         elif p == Measure.kilometer:
