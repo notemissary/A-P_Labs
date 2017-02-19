@@ -8,5 +8,5 @@ a = [[1, 2, 3],
      [7, 8, 9]]
 s_1 = {i for i in range(n)}
 s_2 = {i for i in range(n)}
-print(sum(val for row_id, row in enumerate(a) if row_id in s_1
-          for col_id, val in enumerate(row) if col_id in s_2))
+print(sum(value for row_id, row in enumerate(a) if row_id in s_1
+          for col_id, value in enumerate(row) if col_id in s_2))
