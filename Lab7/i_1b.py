@@ -5,7 +5,7 @@
 
 ru_alpha = {"а", "е", "ё", "о", "у", "э", "я", "ю", "ы", "и"}
 while True:
-    inp = input()
+    inp = input().lower()
     if inp.endswith('.'):
         inp = set(inp.split(', '))
         if '.' in inp:
