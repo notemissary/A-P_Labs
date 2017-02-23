@@ -18,7 +18,7 @@ while True:
         if len(c) == 0:
             print('Result is an empty set.')
         else:
-            print(c)
+            print(sorted(c))
     except ValueError:
         print('Input numbers, separated by spaces!')
     if input('Press Enter to continue...') != '':
