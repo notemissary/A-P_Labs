@@ -20,6 +20,6 @@ while True:
         else:
             print(sorted(c))
     except ValueError:
-        print('Input numbers, separated by spaces!')
+        print('Input integers, separated by spaces!')
     if input('Press Enter to continue...') != '':
         break
