@@ -13,4 +13,3 @@ while True:
               for col_id, value in enumerate(row) if col_id in s_2))
     if input('Press Enter to continue...') != '':
         break
-
