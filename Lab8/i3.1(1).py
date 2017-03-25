@@ -3,8 +3,8 @@
 
 import numpy as np
 
-len = int(input('Введите длину массива: '))
-arr = np.arange(len + 1)
+l = int(input('Введите длину массива: '))
+arr = np.arange(l+1)
 x = int(input('Введите искомый элемент: '))
 i = 0
 while True:
@@ -13,6 +13,6 @@ while True:
         break
     else:
         i += 1
-        if i == len+1:
+        if i == l+1:
             print('Провал! Элемент {} не найден.'.format(x))
             break
