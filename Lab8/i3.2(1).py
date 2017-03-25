@@ -25,7 +25,7 @@ i = m = 0
 while m+i < len(S):
     if W[i] == S[m+i]:
         if i == len(W)-1:
-            print(m)
+            print('Успех! Подстрока найдена на позиции {}.'.format(m))
             break
         i += 1
     else:
@@ -36,4 +36,4 @@ while m+i < len(S):
             m += 1
             i = 0
 else:
-    print('No success.')
+    print('Провал! Подстрока не найдена.')
