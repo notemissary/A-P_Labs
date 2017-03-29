@@ -8,14 +8,14 @@ W = input('Введите подстроку: ')
 m = len(S)
 n = len(W)
 
-d = np.zeros((m, n), int)
+d = np.ones((m+1, n+1), int)
 
 # the distance of any first string to an empty second string
 # (transforming the string of the first i characters of S into
 # the empty string requires i deletions)
-for i in range(m):
+for i in range(1, m+1):
     d[i, 0] = i
-for j in range(n):
+for j in range(1, n+1):
     d[0, j] = j  # the distance of any second string to an empty first string
 
 for j in range(1, n):
