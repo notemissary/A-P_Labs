@@ -7,11 +7,10 @@ S = input('Введите строку: ')
 W = input('Введите искомую строку: ')
 
 T = np.arange(2048)
-for i in range(0, 256):
+for i in range(0, 2048):
     T[i] = len(W)
 for i in range(0, len(W)-1):
     T[ord(W[i])] = len(W) - 1 - i
-
 
 skip = 0
 while len(S) - skip >= len(W):
@@ -19,6 +18,7 @@ while len(S) - skip >= len(W):
     while S[skip + i] == W[i]:
         if i == 0:
             print(skip+1)
+            exit()
         i -= 1
     skip += T[ord(S[skip + len(W) - 1])]
 else:
