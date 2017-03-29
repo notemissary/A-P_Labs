@@ -3,23 +3,23 @@
 
 import numpy as np
 
-haystack = input('Введите строку: ')
-needle = input('Введите искомую строку: ')
+S = input('Введите строку: ')
+W = input('Введите искомую строку: ')
 
 T = np.arange(2048)
 for i in range(0, 256):
-    T[i] = len(needle)
-for i in range(0, len(needle)-1):
-    T[ord(needle[i])] = len(needle) - 1 - i
+    T[i] = len(W)
+for i in range(0, len(W)-1):
+    T[ord(W[i])] = len(W) - 1 - i
 
 
 skip = 0
-while len(haystack) - skip >= len(needle):
-    i = len(needle) - 1
-    while haystack[skip + i] == needle[i]:
+while len(S) - skip >= len(W):
+    i = len(W) - 1
+    while S[skip + i] == W[i]:
         if i == 0:
             print(skip+1)
         i -= 1
-    skip += T[ord(haystack[skip + len(needle)-1])]
+    skip += T[ord(S[skip + len(W) - 1])]
 else:
     print('Nothing has been found.')
