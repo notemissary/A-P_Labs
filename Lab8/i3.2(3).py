@@ -13,9 +13,9 @@ d = np.zeros((m, n), int)
 # the distance of any first string to an empty second string
 # (transforming the string of the first i characters of S into
 # the empty string requires i deletions)
-for i in range(0, m):
+for i in range(m):
     d[i, 0] = i
-for j in range(0, n):
+for j in range(n):
     d[0, j] = j  # the distance of any second string to an empty first string
 
 for j in range(1, n):
