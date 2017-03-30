@@ -31,21 +31,21 @@ while True:
             if adding[0] == 'Красный':
                 if adding[1] == 1:
                     DB[0][1][1] += adding[2]
-                elif adding[2] == 2:
+                elif adding[1] == 2:
                     DB[0][2][1] += adding[2]
                 else:
                     DB[0][3][1] += adding[2]
             elif adding[0] == 'Зелёный':
                 if adding[1] == 1:
                     DB[1][1][1] += adding[2]
-                elif adding[2] == 2:
+                elif adding[1] == 2:
                     DB[1][2][1] += adding[2]
                 else:
                     DB[1][3][1] += adding[2]
             elif adding[0] == 'Синий':
                 if adding[1] == 1:
                     DB[2][1][1] += adding[2]
-                elif adding[2] == 2:
+                elif adding[1] == 2:
                     DB[2][2][1] += adding[2]
                 else:
                     DB[2][3][1] += adding[2]
@@ -62,7 +62,7 @@ while True:
                 if deletion[1] == 1:
                     if DB[0][1][1] >= deletion[2]:
                         DB[0][1][1] -= deletion[2]
-                elif deletion[2] == 2:
+                elif deletion[1] == 2:
                     if DB[0][2][1] >= deletion[2]:
                         DB[0][2][1] -= deletion[2]
                 else:
@@ -72,7 +72,7 @@ while True:
                 if deletion[1] == 1:
                     if DB[1][1][1] >= deletion[2]:
                         DB[1][1][1] -= deletion[2]
-                elif deletion[2] == 2:
+                elif deletion[1] == 2:
                     if DB[1][2][1] >= deletion[2]:
                         DB[1][2][1] -= deletion[2]
                 else:
@@ -82,14 +82,14 @@ while True:
                 if deletion[1] == 1:
                     if DB[2][1][1] >= deletion[2]:
                         DB[2][1][1] -= deletion[2]
-                elif deletion[2] == 2:
+                elif deletion[1] == 2:
                     if DB[2][2][1] >= deletion[2]:
                         DB[2][2][1] -= deletion[2]
                 else:
                     if DB[2][3][1] >= deletion[2]:
                         DB[2][3][1] -= deletion[2]
-            print('Успех! Удалено {} деталей, цвета {}, размера {}.'
-                  ''.format(deletion[2], deletion[0], deletion[1]))
+            print('\nУспех! Удалено {} деталей, цвета {}, размера {}.'
+                  '\n'.format(deletion[2], deletion[0], deletion[1]))
         elif ch == 3:
             print('============================================')
             for i in range(len(DB)):
@@ -99,10 +99,12 @@ while True:
             print('============================================')
         elif ch == 4:
             if len(story) != 0:
+                print('==================История==================')
                 for i in range(len(story)):
-                    print('{}) '.format(i))
+                    print('{})'.format(i), end=' ')
                     for j in story[i]:
                         print(j, end=', ')
+                print('\n============================================')
             else:
                 print('Ничего не поступало!')
         elif ch == 0:
