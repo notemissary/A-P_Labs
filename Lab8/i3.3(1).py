@@ -28,29 +28,29 @@ while True:
                 adding[2] = int(adding[2])
             except IndexError:
                 pass
-            if adding[0] == 'Красный':
+            if adding[0].lower() == DB[0][0].lower():
                 if adding[1] == 1:
                     DB[0][1][1] += adding[2]
                 elif adding[1] == 2:
                     DB[0][2][1] += adding[2]
                 else:
                     DB[0][3][1] += adding[2]
-            elif adding[0] == 'Зелёный':
+            elif adding[0].lower() == DB[1][0].lower():
                 if adding[1] == 1:
                     DB[1][1][1] += adding[2]
                 elif adding[1] == 2:
                     DB[1][2][1] += adding[2]
                 else:
                     DB[1][3][1] += adding[2]
-            elif adding[0] == 'Синий':
+            elif adding[0].lower() == DB[2][0].lower():
                 if adding[1] == 1:
                     DB[2][1][1] += adding[2]
                 elif adding[1] == 2:
                     DB[2][2][1] += adding[2]
                 else:
                     DB[2][3][1] += adding[2]
-            print('Успех! Добавлено {} деталей, цвета {}, размера {}.'
-                  ''.format(adding[2], adding[0], adding[1]))
+            print('\nУспех! Добавлено {} деталей, цвета {}, размера {}.'
+                  '\n'.format(adding[2], adding[0], adding[1]))
         elif ch == 2:
             deletion = input('Введите через запятую цвет детали, её размер и колличество: ')
             deletion = deletion.split(', ')
@@ -106,10 +106,11 @@ while True:
                         print(j, end=', ')
                 print('\n============================================')
             else:
-                print('Ничего не поступало!')
+                print('\nНичего не поступало!\n')
         elif ch == 0:
             exit()
         else:
-            print('Ошибка! Ха!')
+            print('\nОшибка! Ха!\n')
     except IndexError:
         print('\nВы ввели что-то неверно! Введи снова.\n')
+        story.pop()
