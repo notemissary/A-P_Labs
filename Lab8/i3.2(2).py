@@ -5,9 +5,14 @@ import numpy as np
 
 S = input('Введите строку: ')
 W = input('Введите искомую строку: ')
+a = list({i for i in S+W})
+b = []
+for i in a:
+    b.append(ord(i))
 
-T = np.arange(len(S)+len(W))
-for i in range(0, len(S)+len(W)):
+a = max(b)
+T = np.arange(a)
+for i in range(0, a):
     T[i] = len(W)
 for i in range(0, len(W)-1):
     T[ord(W[i])] = len(W) - 1 - i
