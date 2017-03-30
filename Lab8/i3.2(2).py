@@ -6,8 +6,8 @@ import numpy as np
 S = input('Введите строку: ')
 W = input('Введите искомую строку: ')
 
-T = np.arange(2048)
-for i in range(0, 2048):
+T = np.arange(len(S)+len(W))
+for i in range(0, len(S)+len(W)):
     T[i] = len(W)
 for i in range(0, len(W)-1):
     T[ord(W[i])] = len(W) - 1 - i
