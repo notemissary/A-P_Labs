@@ -9,7 +9,7 @@ n = len(W)
 
 for k in S:
     m = len(k)
-    d = np.ones((m + 1, n + 1), int)
+    d = np.ones((m, n), int)
 
     # the distance of any first string to an empty second string
     # (transforming the string of the first i characters of S into
@@ -27,6 +27,5 @@ for k in S:
                                d[i, j-1]+1,  # an insertion
                                d[i-1, j-1]+1))  # a substitution
 
-    p = d[m, n]
-    if p <= m % 3:
+    if d[m-1, n-1] <= m % 3:
         print(k, end=', ')
