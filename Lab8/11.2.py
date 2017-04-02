@@ -5,22 +5,13 @@
 import numpy as np
 import itertools
 
+N = int(input('Введите длину массива: '))
 K = int(input('Насколько сдвинуть массив? '))
-m = np.arange(0, 10).ravel()
-b = np.broadcast(K, 0)
-s = {ax: 0 for ax in range(m.ndim)}
-for sh, ax in b:
-    if -m.ndim <= ax < m.ndim:
-        s[ax % m.ndim] += sh
-rolls = [((slice(None), slice(None)),)] * m.ndim
-res = np.empty_like(m)
-for ax, offset in s.items():
-    offset %= m.shape[ax] or 1
-    if offset:
-        rolls[ax] = ((slice(None, -offset), slice(offset, None)),
-                     (slice(-offset, None), slice(None, offset)))
-    for indicies in itertools.product(*rolls):
-        arr_index, res_index = zip(*indicies)
-        res[res_index] = m[arr_index]
-
-print(res)
+m = np.arange(0, N)
+for j in range(K):
+    v = m[0]
+    for i in range(0, len(m)):
+        c = -i
+        m[-i] = m[-i-1]
+    m[c] = v
+print(m)

@@ -4,7 +4,13 @@
 # и корректировать данные о наличии деталей на складе при поступлении новой
 # партии деталей. При этом должна фиксироваться дата поступления деталей.
 
-import numpy as np
+from enum import Enum
+
+
+class Color(Enum):
+    Red = 0
+    Green = 1
+    Blue = 2
 
 DB = [['Красный', [1, 0], [2, 0], [3, 0]],
       ['Зелёный', [1, 0], [2, 0], [3, 0]],
@@ -66,32 +72,50 @@ while True:
                 if deletion[1] == 1:
                     if DB[0][1][1] >= deletion[2]:
                         DB[0][1][1] -= deletion[2]
+                    else:
+                        print('Нельзя удалить больше, чем есть.')
                 elif deletion[1] == 2:
                     if DB[0][2][1] >= deletion[2]:
                         DB[0][2][1] -= deletion[2]
+                    else:
+                        print('Нельзя удалить больше, чем есть.')
                 else:
                     if DB[0][3][1] >= deletion[2]:
                         DB[0][3][1] -= deletion[2]
+                    else:
+                        print('Нельзя удалить больше, чем есть.')
             elif deletion[0].lower() == DB[1][0].lower():
                 if deletion[1] == 1:
                     if DB[1][1][1] >= deletion[2]:
                         DB[1][1][1] -= deletion[2]
+                    else:
+                        print('Нельзя удалить больше, чем есть.')
                 elif deletion[1] == 2:
                     if DB[1][2][1] >= deletion[2]:
                         DB[1][2][1] -= deletion[2]
+                    else:
+                        print('Нельзя удалить больше, чем есть.')
                 else:
                     if DB[1][3][1] >= deletion[2]:
                         DB[1][3][1] -= deletion[2]
+                    else:
+                        print('Нельзя удалить больше, чем есть.')
             elif deletion[0].lower() == DB[2][0].lower():
                 if deletion[1] == 1:
                     if DB[2][1][1] >= deletion[2]:
                         DB[2][1][1] -= deletion[2]
+                    else:
+                        print('Нельзя удалить больше, чем есть.')
                 elif deletion[1] == 2:
                     if DB[2][2][1] >= deletion[2]:
                         DB[2][2][1] -= deletion[2]
+                    else:
+                        print('Нельзя удалить больше, чем есть.')
                 else:
                     if DB[2][3][1] >= deletion[2]:
                         DB[2][3][1] -= deletion[2]
+                    else:
+                        print('Нельзя удалить больше, чем есть.')
             print('\nУспех! Удалено {} деталей, цвета {}, размера {}.'
                   '\n'.format(deletion[2], deletion[0], deletion[1]))
         elif ch == 3:
