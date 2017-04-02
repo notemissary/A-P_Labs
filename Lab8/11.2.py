@@ -8,10 +8,11 @@ import itertools
 N = int(input('Введите длину массива: '))
 K = int(input('Насколько сдвинуть массив? '))
 m = np.arange(0, N)
+print(m)
 for j in range(K):
     v = m[0]
-    for i in range(0, len(m)):
-        c = -i
-        m[-i] = m[-i-1]
+    for i in range(0, len(m)-1):
+        c = i+1
+        m[i] = m[c]
     m[c] = v
 print(m)
