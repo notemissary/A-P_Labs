@@ -11,9 +11,4 @@ for i in range(3):
 for i in range(3):
     for j in range(3):
         n[i][j] = int(input('Введите элемент n[{}][{}]: '.format(i+1, j+1)))
-res = np.zeros((3, 3))
-for i in range(3):
-    for k in range(3):
-        for u in range(3):
-            res[i, k] += m[i][u] * n[u][k]
-print(res)
+print(np.asanyarray([[sum(a*b for a, b in zip(m_row, n_col)) for n_col in zip(*n)] for m_row in m]))
