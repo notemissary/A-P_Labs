@@ -2,9 +2,12 @@
 # Повернуть квадратный массив ndarray на 90 градусов по часовой стрелке.
 
 import numpy as np
-m = np.array([[1, 2, 3],
-              [4, 5, 6],
-              [7, 8, 9]], int)
-print(np.transpose(np.flip(m, 0), (1, 0)))
 
+N = int(input('Введите размер матрицы через пробел: '))
 
+m = np.arange(N*N).reshape((N, N))
+m = m[::-1]
+for i in range(len(m)):
+        for j in range(i+1, len(m[i])):
+            m[i][j], m[j][i] = m[j][i], m[i][j]
+print(m)
