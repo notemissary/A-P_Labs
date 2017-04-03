@@ -33,9 +33,9 @@ while True:
             adding = input('Введите через запятую цвет детали, её размер, колличество и '
                            'дату поступления: ')
             adding = adding.split(', ')
-            story.append(adding)
             try:
                 adding[2] = int(adding[2])
+                story.append(adding)
             except IndexError:
                 print('Ошибка, введены некорректные данные.')
             if adding[0].lower() == DB[0][0].lower():
@@ -141,4 +141,3 @@ while True:
             print('\nОшибка! Ха!\n')
     except IndexError:
         print('\nВы ввели что-то неверно! Введи снова.\n')
-        story.pop()
