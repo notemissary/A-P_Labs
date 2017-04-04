@@ -1,6 +1,9 @@
 # Дыма Владимир. КНИТ16-А
 # Алгоритм Кнута-Морриса-Пратта
 
+from timeit import timeit
+
+setup = '''
 d = input('Введите строку: ')
 W = input('Введите искомую подстроку: ')
 
@@ -19,7 +22,9 @@ while pos < len(W):
     else:
         T[pos] = 0
         pos += 1
+'''
 
+stmt = '''
 m = 0
 i = 0
 while m+i < len(d):
@@ -37,3 +42,6 @@ while m+i < len(d):
             i = 0
 else:
     print('Провал! Подстрока не найдена.')
+'''
+
+print('Время выполнения: {} секунд.'.format(timeit(stmt, setup, number=1)))

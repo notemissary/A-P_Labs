@@ -1,12 +1,16 @@
 # Дыма Владимир. КНИТ16-А
 # Алгоритм Вагнера-Фишера
+from timeit import timeit
 
+setup = '''
 import numpy as np
 
 S = (input('Введите строку: ').lower()).split(', ')
 W = input('Введите подстроку: ').lower()
 n = len(W)
+'''
 
+stmt = '''
 for k in S:
     m = len(k)
     d = np.zeros((m, n), int)
@@ -29,3 +33,7 @@ for k in S:
     t = m % 3
     if d[m-1, n-1] <= m % 3:
         print(k, end=', ')
+print()
+'''
+
+print('Время выполнения: {} секунд.'.format(timeit(stmt, setup, number=1)))

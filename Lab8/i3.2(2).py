@@ -1,6 +1,9 @@
 # Дыма Владимир. КНИТ16-А
 # Алгоритм Бойера-Мура-Хорспула
 
+from timeit import timeit
+
+setup = '''
 import numpy as np
 
 d = input('Введите строку: ')
@@ -16,7 +19,9 @@ for i in range(0, a):
     T[i] = len(W)
 for i in range(0, len(W)-1):
     T[ord(W[i])] = len(W) - 1 - i
+'''
 
+stmt = '''
 skip = 0
 while len(d) - skip >= len(W):
     i = len(W) - 1
@@ -28,3 +33,6 @@ while len(d) - skip >= len(W):
     skip += T[ord(d[skip + len(W) - 1])]
 else:
     print('Nothing has been found.')
+'''
+
+print('Время выполнения: {} секунд.'.format(timeit(stmt, setup, number=1)))
