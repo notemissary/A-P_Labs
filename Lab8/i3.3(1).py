@@ -35,7 +35,8 @@ while True:
             adding = adding.split(', ')
             try:
                 adding[2] = int(adding[2])
-                story.append(adding)
+                if len(adding) == 4:
+                    story.append(adding)
             except IndexError:
                 print('Ошибка, введены некорректные данные.')
             if adding[0].lower() == DB[0][0].lower():

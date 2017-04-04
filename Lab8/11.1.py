@@ -3,7 +3,7 @@
 
 import numpy as np
 
-N = int(input('Введите размер матрицы через пробел: '))
+N = int(input('Введите размер матрицы: '))
 
 m = np.arange(N*N).reshape((N, N))
 m = m[::-1]
