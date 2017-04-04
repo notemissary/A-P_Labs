@@ -4,33 +4,31 @@
 from timeit import timeit
 
 setup = '''
-import numpy as np
+text = input('Введите строку: ')
+pattern = input('Введите искомую строку: ')
+m = len(pattern)
+n = len(text)
+if m>n:
+    print('Nothing was found.')
 
-d = input('Введите строку: ')
-W = input('Введите искомую строку: ')
-a = {i for i in d + W}
-b = []
-for i in a:
-    b.append(ord(i))
-
-a = max(b)
-T = np.arange(a)
-for i in range(0, a):
-    T[i] = len(W)
-for i in range(0, len(W)-1):
-    T[ord(W[i])] = len(W) - 1 - i
+skip = [m] * (ord(max(max(text), max(pattern)))+1)
+for k in range(m-1):
+    skip[ord(pattern[k])] = m - k - 1
+skip = tuple(skip)
 '''
 
 stmt = '''
-skip = 0
-while len(d) - skip >= len(W):
-    i = len(W) - 1
-    while d[skip + i] == W[i]:
-        if i == 0:
-            print(skip+1)
-            exit()
+k = m-1
+while k < n:
+    j = m - 1
+    i = k
+    while j >= 0 and text[i] == pattern[j]:
+        j -= 1
         i -= 1
-    skip += T[ord(d[skip + len(W) - 1])]
+    if j == -1:
+        print('String found at postition {}'.format(i+1))
+        exit()
+    k += skip[ord(text[k])]
 else:
     print('Nothing has been found.')
 '''
