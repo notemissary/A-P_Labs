@@ -29,5 +29,6 @@ m = np.arange(N*N)
 for i in range(len(m)):
     m[i] = r.randint(-10, 10)
 m = m.reshape(N, N)
-print(m)
-print(det(m))
+print('Матрица:', m, sep='\n')
+print('Детерминант матрицы: {}'.format(det(m)))
+print('Детерминант матрицы, определённый функцией NumPy: {}'.format(int(np.linalg.det(m))))
