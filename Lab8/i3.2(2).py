@@ -8,7 +8,7 @@ import numpy as np
 
 d = input('Введите строку: ')
 W = input('Введите искомую строку: ')
-a = list({i for i in d + W})
+a = {i for i in d + W}
 b = []
 for i in a:
     b.append(ord(i))
