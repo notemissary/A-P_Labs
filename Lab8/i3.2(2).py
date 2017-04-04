@@ -3,7 +3,7 @@
 
 from timeit import timeit
 
-setup = '''
+#setup = '''
 text = input('Введите строку: ')
 pattern = input('Введите искомую строку: ')
 m = len(pattern)
@@ -15,9 +15,9 @@ skip = [m] * (ord(max(max(text), max(pattern)))+1)
 for k in range(m-1):
     skip[ord(pattern[k])] = m - k - 1
 skip = tuple(skip)
-'''
+#'''
 
-stmt = '''
+#stmt = '''
 k = m-1
 while k < n:
     j = m - 1
@@ -31,6 +31,6 @@ while k < n:
     k += skip[ord(text[k])]
 else:
     print('Nothing has been found.')
-'''
+#'''
 
-print('Время выполнения: {} секунд.'.format(timeit(stmt, setup, number=1)))
+#print('Время выполнения: {} секунд.'.format(timeit(stmt, setup, number=1)))
