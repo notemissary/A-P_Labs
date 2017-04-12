@@ -1,18 +1,18 @@
 # Дыма Владимир. КНИТ16-А
 # Прямой поиск подстроки
 
-from timeit import timeit
+# from timeit import timeit
 
-setup = '''
+# setup = '''
 s = input('Введите строку: ')
 ss = input('Введите искомую подстроку: ')
 ls = len(s)
 lss = len(ss)
 I = 1
 c = 0
-'''
+# '''
 
-stmt = '''
+# stmt = '''
 while c < lss:
     if s[I-1] == ss[c]:
         I += 1
@@ -26,6 +26,6 @@ while c < lss:
         exit()
 else:
     print('Успех! Подстрока начинается с позиции {}'.format(I - 1))
-'''
+# '''
 
-print('Время выполнения: {} '.format(timeit(stmt, setup, number=1)))
+# print('Время выполнения: {} '.format(timeit(stmt, setup, number=1)))
