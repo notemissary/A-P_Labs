@@ -2,24 +2,22 @@
 # Bubble sort, selection sort, insertion sort
 
 import random as r
+import copy as c
 
 
 def bubble(arr):
-    k = 0
-    while k < len(arr):
-        for i in range(1, len(arr)):
-            if arr[i-1] > arr[i]:
-                arr[i-1], arr[i] = arr[i], arr[i-1]
-        k += 1
+    for j in range(len(arr)-1, 0, -1):
+        for i in range(len(arr)-1):
+            if arr[i] > arr[i+1]:
+                arr[i], arr[i+1] = arr[i+1], arr[i]
     return arr
 
 
 def selection(arr):
-    for i in range(len(arr)-1):
-        m = min(arr[i+1:])
-        if arr[i] > m:
-            arr[i], arr[arr.index(m)] = \
-                arr[arr.index(min(m))], arr[i]
+    for i in range(len(arr)):
+        m = min(arr[i:])
+        mi = arr[i:].index(m)
+        arr[i+mi], arr[i] = arr[i], m
     return arr
 
 
@@ -34,7 +32,9 @@ def insertion(arr):
     return arr
 
 N = int(input('Insert the length of the array: '))
-A = B = C = r.sample([i for i in range(N**2)], N)
+A = r.sample([i for i in range(N**2)], N)
+B = c.deepcopy(A)
+C = c.deepcopy(A)
 
 print(A)
 print(bubble(A))
