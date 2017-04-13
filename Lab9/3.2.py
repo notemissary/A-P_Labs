@@ -30,7 +30,7 @@ def shell(arr):
                 arr[j] = arr[j-gap]
                 j -= gap
             arr[j] = val
-        gap = gap * 5 // 8
+        gap //= 2
     return arr
 
 
@@ -38,7 +38,7 @@ def heap(arr):
     return arr
 
 N = int(input('Insert the length of the array: '))
-A = r.sample([i for i in range(N**2)], N)
+A = r.sample([i for i in range(-N+1, N)], N)
 B = c.deepcopy(A)
 C = c.deepcopy(A)
 
