@@ -6,6 +6,15 @@ import copy as c
 
 
 def bubble(arr):
+    """
+    Bubble sort
+    It is a  sorting algorithm that repeatedly steps through the list to 
+    be sorted, compares each pair of adjacent items and swaps them if 
+    they are in the wrong order.
+    
+    :param arr: 
+    :return:
+    """
     for j in range(len(arr)-1, 0, -1):
         for i in range(len(arr)-1):
             if arr[i] > arr[i+1]:
@@ -14,6 +23,13 @@ def bubble(arr):
 
 
 def selection(arr):
+    """
+    Selection sort
+    It is a sorting algorithm, specifically an in-place comparison sort.
+    
+    :param arr: 
+    :return:
+    """
     for i in range(len(arr)):
         m = min(arr[i:])
         mi = arr[i:].index(m)
@@ -22,6 +38,14 @@ def selection(arr):
 
 
 def insertion(arr):
+    """
+    Insertion sort
+    It is a sorting algorithm that builds the final sorted array one item 
+    at a time.
+    
+    :param arr: 
+    :return:
+    """
     for i in range(1, len(arr)):
         x = arr[i]
         j = i - 1

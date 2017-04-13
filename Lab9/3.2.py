@@ -6,6 +6,14 @@ import copy as c
 
 
 def shake(arr):
+    """
+    Cocktail shaker sort
+    It is a variation of bubble sort that is both a stable sorting algorithm 
+    and a comparison sort.
+    
+    :param arr: 
+    :return: 
+    """
     left = 0
     right = len(arr)-1
     while left <= right:
@@ -22,6 +30,13 @@ def shake(arr):
 
 
 def shell(arr):
+    """
+    Shellsort
+    It is an in-place comparison sort.
+    
+    :param arr: 
+    :return: 
+    """
     gap = len(arr) // 2
     while gap > 0:
         for i in range(gap, len(arr)):
@@ -35,8 +50,26 @@ def shell(arr):
 
 
 def heap(arr):
+    """
+    Heapsort
+    It is a comparison-based sorting algorithm. 
+    Heapsort can be thought of as an improved selection sort: like that 
+    algorithm, it divides its input into a sorted and an unsorted region, 
+    and it iteratively shrinks the unsorted region by extracting the largest 
+    element and moving that to the sorted region.
+    
+    :param arr: 
+    :return: 
+    """
     def heapify(last, j):
-        '''Создаёт бинарное дерево.'''
+        """
+        Heapifying of sequence
+        Creates a binary tree from the given array.
+        
+        :param last: 
+        :param j: 
+        :return: 
+        """
         l = 2 * j + 1
         r = 2 * (j + 1)
         mx = j
@@ -49,7 +82,7 @@ def heap(arr):
             heapify(last, mx)
 
     end = len(arr)
-    start = end // 2 - 1  # use // instead of /
+    start = end // 2 - 1
     for k in range(start, -1, -1):
         heapify(end, k)
     for k in range(end - 1, 0, -1):
