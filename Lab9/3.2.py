@@ -22,6 +22,15 @@ def shake(arr):
 
 
 def shell(arr):
+    gap = len(arr) // 2
+    while gap > 0:
+        for i in range(gap, len(arr)):
+            val, j = arr[i], i
+            while j >= gap and arr[j-gap] > val:
+                arr[j] = arr[j-gap]
+                j -= gap
+            arr[j] = val
+        gap = gap * 5 // 8
     return arr
 
 
