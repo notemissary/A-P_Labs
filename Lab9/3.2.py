@@ -1,7 +1,7 @@
 # Дыма Владимир. КНИТ16-А
 # Cocktail shaker sort, Shellsort, Heapsort
 
-import random as r
+import random as rn
 import copy as c
 
 
@@ -35,10 +35,34 @@ def shell(arr):
 
 
 def heap(arr):
+    def swap(i, j):
+        '''Меняет дочерний и ммаксимальный элементы.'''
+        arr[i], arr[j] = arr[j], arr[i]
+
+    def heapify(last, j):
+        '''Создаёт бинарное дерево.'''
+        l = 2 * j + 1
+        r = 2 * (j + 1)
+        mx = j
+        if l < last and arr[j] < arr[l]:
+            mx = l
+        if r < last and arr[mx] < arr[r]:
+            mx = r
+        if mx != j:
+            swap(j, mx)
+            heapify(last, mx)
+
+    end = len(arr)
+    start = end // 2 - 1  # use // instead of /
+    for k in range(start, -1, -1):
+        heapify(end, k)
+    for k in range(end - 1, 0, -1):
+        swap(k, 0)
+        heapify(k, 0)
     return arr
 
 N = int(input('Insert the length of the array: '))
-A = r.sample([i for i in range(-N+1, N)], N)
+A = rn.sample([i for i in range(-N + 1, N)], N)
 B = c.deepcopy(A)
 C = c.deepcopy(A)
 
