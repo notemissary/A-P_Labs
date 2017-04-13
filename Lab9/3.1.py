@@ -32,7 +32,7 @@ def insertion(arr):
     return arr
 
 N = int(input('Insert the length of the array: '))
-A = r.sample([i for i in range(N**2)], N)
+A = r.sample(range(-2 * N, 2 * N), N)
 B = c.deepcopy(A)
 C = c.deepcopy(A)
 
