@@ -35,10 +35,6 @@ def shell(arr):
 
 
 def heap(arr):
-    def swap(i, j):
-        '''Меняет дочерний и ммаксимальный элементы.'''
-        arr[i], arr[j] = arr[j], arr[i]
-
     def heapify(last, j):
         '''Создаёт бинарное дерево.'''
         l = 2 * j + 1
@@ -49,7 +45,7 @@ def heap(arr):
         if r < last and arr[mx] < arr[r]:
             mx = r
         if mx != j:
-            swap(j, mx)
+            arr[j], arr[mx] = arr[mx], arr[j]
             heapify(last, mx)
 
     end = len(arr)
@@ -57,7 +53,7 @@ def heap(arr):
     for k in range(start, -1, -1):
         heapify(end, k)
     for k in range(end - 1, 0, -1):
-        swap(k, 0)
+        arr[k], arr[0] = arr[0], arr[k]
         heapify(k, 0)
     return arr
 
@@ -66,7 +62,7 @@ A = rn.sample([i for i in range(-N + 1, N)], N)
 B = c.deepcopy(A)
 C = c.deepcopy(A)
 
-print(A)
-print(shake(A))
-print(shell(B))
-print(heap(C))
+print('Original array: \n{}'.format(A))
+print('Cocktail shaker sort: \n{}'.format(shake(A)))
+print('Shellsort: \n{}'.format(shell(B)))
+print('Heapsort: \n{}'.format(heap(C)))
