@@ -11,8 +11,10 @@ def shake(arr):
     It is a variation of bubble sort that is both a stable sorting algorithm 
     and a comparison sort.
     
-    :param arr: 
-    :return: 
+    shake(arr)
+        arr: takes an array as a parameter.
+    
+    Returns sorted array in ascending order.
     """
     left = 0
     right = len(arr)-1
@@ -34,8 +36,10 @@ def shell(arr):
     Shellsort
     It is an in-place comparison sort.
     
-    :param arr: 
-    :return: 
+    shell(arr)
+        arr: takes an array as a parameter.
+        
+    Returns sorted array in ascending order.
     """
     gap = len(arr) // 2
     while gap > 0:
@@ -58,17 +62,21 @@ def heap(arr):
     and it iteratively shrinks the unsorted region by extracting the largest 
     element and moving that to the sorted region.
     
-    :param arr: 
-    :return: 
+    heap(arr)
+        arr: takes a sequence as a parameter
+        
+    Returns sorted array in ascending order.
     """
     def heapify(last, j):
         """
-        Heapifying of sequence
+        Heapifying the sequence
         Creates a binary tree from the given array.
         
-        :param last: 
-        :param j: 
-        :return: 
+        heapify(last, j)
+            last: last element of the array 
+            j: 
+        
+        Returns a tree like array.
         """
         l = 2 * j + 1
         r = 2 * (j + 1)
