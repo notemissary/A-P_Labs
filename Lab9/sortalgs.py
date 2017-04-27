@@ -2,8 +2,8 @@
 # Bubble sort, selection sort, insertion sort,
 # Cocktail shaker sort, Shellsort, Heapsort
 
-from numpy import where, asarray, set_printoptions, empty
-from random import sample, randint
+from numpy import where, asarray, set_printoptions, empty, delete
+from random import sample
 from time import clock
 
 
@@ -104,37 +104,41 @@ def shake(arr):
     return arr, c, s
 
 
-def shell(arr):
+def shell(arr, gaps):
     """
     Shellsort
     It is an in-place comparison sort.
 
     :param arr: Takes an array.
+    :param gaps: Takes gaps sequence.
     :return: Returns sorted array, comparision number and switch number.
     """
     c = 2
     s = 0
-    gap = len(arr) // 2
-    while gap > 0:
+    # gap = len(arr) // 2
+    # while gap > 0:
+    #     for i in range(gap, len(arr)):
+    #         val, j = arr[i], i
+    #         s += 1
+    #         while j >= gap and arr[j - gap] > val:
+    #             arr[j] = arr[j - gap]
+    #             j -= gap
+    #             c += 2
+    #         arr[j] = val
+    #     gap //= 2
+    #     c += 1
+    for gap in gaps:
         for i in range(gap, len(arr)):
-            val, j = arr[i], i
-            s += 1
-            while j >= gap and arr[j - gap] > val:
-                arr[j] = arr[j - gap]
+            val = arr[i]
+            j = i
+            while j >= gap and arr[j-gap] > val:
+                arr[j] = arr[j-gap]
                 j -= gap
                 c += 2
             arr[j] = val
-        gap //= 2
+            s += 1
+            c += 1
         c += 1
-    # gaps = [701, 301, 132, 57, 23, 10, 4, 1]
-    # for gap in gaps:
-    #     for i in range(gap, arr[-1]):
-    #         temp = arr[i]
-    #         j = i
-    #         while j >= gap and arr[j-gap] > temp:
-    #             arr[j] = arr[j-gap]
-    #             j -= gap
-    #         arr[j] = temp
     return arr, c, s
 
 
@@ -219,11 +223,11 @@ while True:
                                 A[v] = int(input('Input an integer for {} element: '
                                                  ''.format(v+1)))
                             except (ValueError, IndexError):
-                                print('Error! Length must be between 0 and 30!')
+                                print('Error! Try again!')
                                 continue
                             break
                 else:
-                    print('Wrong length! Try again.')
+                    print('Wrong length! Set it between 0 and 30!')
                     continue
             except ValueError:
                 print('Length must be integer!')
@@ -242,6 +246,19 @@ while True:
     else:
         print('Error! Answer with y for yes and n for no')
         continue
+    if len(A) > 4000:
+        g = asarray((1, 5, 19, 41, 109, 209, 505, 929, 2161, 3905, 8929,
+                     16001, 36289, 64769, 146305, 260609, 587521, 1045505,
+                     2354689, 4188161, 9427969, 16764929, 37730305, 67084289,
+                     150958081, 268386305, 603906049, 1073643521, 2415771649,
+                     4294770689))
+    else:
+        g = asarray((1750, 701, 301, 132, 57, 23, 10, 4, 1))
+    for gg in g:
+        if len(A) < gg:
+            g = g[:where(g == gg)[0][0]]
+            break
+    g = reversed(g)
     while True:
         ch = input('What sort would you want to use?\n'
                    '1 - Bubble sort\n'
@@ -278,7 +295,7 @@ while True:
         elif ch == '5':
             print('Original array: \n{}'.format(A))
             t = clock()
-            res = shell(A)
+            res = shell(A, g)
             t = clock() - t
             print('Shellsort: \n{}\nComparision number: {}\n'
                   'Time: {:.6f} seconds\n'
