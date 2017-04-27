@@ -196,7 +196,11 @@ def heap(arr):
 
 
 def randarr(num):
-    return asarray(sample(range(-2 * num, 2 * num), num))
+    try:
+        return asarray(sample(range(-2 * num, 2 * num), num))
+    except (MemoryError, OverflowError):
+        print('Error! Not enough memory!')
+        return None
 
 
 set_printoptions(threshold=10)
@@ -215,7 +219,7 @@ while True:
                                 A[v] = int(input('Input an integer for {} element: '
                                                  ''.format(v+1)))
                             except (ValueError, IndexError):
-                                print('Error! Try again!')
+                                print('Error! Length must be between 0 and 30!')
                                 continue
                             break
                 else:
@@ -226,28 +230,43 @@ while True:
                 continue
             break
     elif choice == 'n':
-        A = randarr(randint(99900, 100100))
+        while True:
+            try:
+                integer = int(input('Input length of the array: '))
+                A = randarr(integer)
+                if A is None:
+                    continue
+            except ValueError:
+                print('Error! Length must be integer!')
+            break
     else:
         print('Error! Answer with y for yes and n for no')
         continue
     while True:
-        ch = input('What sort would you want to use?\n> ').lower()
-        if ch == 'bubble sort':
+        ch = input('What sort would you want to use?\n'
+                   '1 - Bubble sort\n'
+                   '2 - Selsection sort\n'
+                   '3 - Insertion sort\n'
+                   '4 - Cocktail shaker sort\n'
+                   '5 - Shellsort\n'
+                   '6 - Heapsort\n'
+                   '> ').lower()
+        if ch == '1':
             print('Original array: \n{}'.format(A))
             print('Bubble sort: \n{}\n'
                   '====================================================='
                   ''.format(bubble(A)))
-        elif ch == 'selection sort':
+        elif ch == '2':
             print('Original array: \n{}'.format(A))
             print('Selection sort: \n{}\n'
                   '====================================================='
                   ''.format(selection(A)))
-        elif ch == 'insertion sort':
+        elif ch == '3':
             print('Original array: \n{}'.format(A))
             print('Insertion sort: \n{}\n'
                   '====================================================='
                   ''.format(insertion(A)))
-        elif ch == 'cocktail shaker sort':
+        elif ch == '4':
             print('Original array: \n{}'.format(A))
             t = clock()
             res = shake(A)
@@ -256,7 +275,7 @@ while True:
                   'Time: {:.6f} seconds\n'
                   '====================================================='
                   ''.format(res[0], res[1], t))
-        elif ch == 'shellsort':
+        elif ch == '5':
             print('Original array: \n{}'.format(A))
             t = clock()
             res = shell(A)
@@ -265,7 +284,7 @@ while True:
                   'Time: {:.6f} seconds\n'
                   '====================================================='
                   ''.format(res[0], res[1], t))
-        elif ch == 'heapsort':
+        elif ch == '6':
             print('Original array: \n{}'.format(A))
             t = clock()
             res = heap(A)
@@ -275,7 +294,7 @@ while True:
                   '====================================================='
                   ''.format(res[0], res[1], t))
         else:
-            print('There\'s no such algorithm! Try again!')
+            print('Error! Choose a number of the algorithm.')
             continue
         break
     while True:
