@@ -2,7 +2,7 @@
 # Bubble sort, selection sort, insertion sort,
 # Cocktail shaker sort, Shellsort, Heapsort
 
-from numpy import where, asarray, set_printoptions, empty, delete
+from numpy import where, asarray, set_printoptions, empty
 from random import sample
 from time import clock
 
@@ -237,8 +237,12 @@ while True:
         while True:
             try:
                 integer = int(input('Input length of the array: '))
-                A = randarr(integer)
-                if A is None:
+                if integer > 0:
+                    A = randarr(integer)
+                    if A is None:
+                        continue
+                else:
+                    print('Error! Length MUST be positive number.')
                     continue
             except ValueError:
                 print('Error! Length must be integer!')
@@ -246,19 +250,24 @@ while True:
     else:
         print('Error! Answer with y for yes and n for no')
         continue
-    if len(A) > 4000:
-        g = asarray((1, 5, 19, 41, 109, 209, 505, 929, 2161, 3905, 8929,
-                     16001, 36289, 64769, 146305, 260609, 587521, 1045505,
-                     2354689, 4188161, 9427969, 16764929, 37730305, 67084289,
-                     150958081, 268386305, 603906049, 1073643521, 2415771649,
-                     4294770689))
+    lenA = len(A)
+    if lenA > 4000:
+        g = asarray((4294770689, 2415771649, 1073643521, 603906049, 268386305,
+                     150958081, 67084289, 37730305, 16764929, 9427969,
+                     4188161, 2354689, 1045505, 587521, 260609, 146305,
+                     64769, 36289, 16001, 8929, 3905, 2161, 929, 505, 209,
+                     109, 41, 19, 5, 1))
     else:
         g = asarray((1750, 701, 301, 132, 57, 23, 10, 4, 1))
+    w = 0
     for gg in g:
-        if len(A) < gg:
-            g = g[:where(g == gg)[0][0]]
+        temp = gg
+        if lenA >= gg:
+            w = where(g == temp)[0][0]
+            print(w)
             break
-    g = reversed(g)
+    g = g[w:]
+    print(g)
     while True:
         ch = input('What sort would you want to use?\n'
                    '1 - Bubble sort\n'
