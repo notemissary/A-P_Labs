@@ -108,6 +108,9 @@ def shell(arr, gaps):
     """
     Shellsort
     It is an in-place comparison sort.
+    It uses Sedgewick's sequence if array length is more than 4000 elements.
+    Uses Ciura's sequence if array length is less than or is 4000 elements.
+    Both sequences are the best-known for such lengths.
 
     :param arr: Takes an array.
     :param gaps: Takes gaps sequence.
@@ -115,18 +118,6 @@ def shell(arr, gaps):
     """
     c = 2
     s = 0
-    # gap = len(arr) // 2
-    # while gap > 0:
-    #     for i in range(gap, len(arr)):
-    #         val, j = arr[i], i
-    #         s += 1
-    #         while j >= gap and arr[j - gap] > val:
-    #             arr[j] = arr[j - gap]
-    #             j -= gap
-    #             c += 2
-    #         arr[j] = val
-    #     gap //= 2
-    #     c += 1
     for gap in gaps:
         for i in range(gap, len(arr)):
             val = arr[i]
@@ -252,12 +243,19 @@ while True:
         continue
     lenA = len(A)
     if lenA > 4000:
+        # Robert Sedgewick's gap sequence (1986)
+        # Formulas:
+        # a(n) = 9*2^n - 9*2^(n/2) + 1 if n is even;
+        # a(n) = 8*2^n - 6*2^((n+1)/2) + 1 if n is odd.
+        # G.f.: (8*x^4 + 2*x^3 - 8*x^2 - 4*x - 1)/((x-1)*(2*x+1)*(2*x-1)*(2*x^2-1))
         g = asarray((4294770689, 2415771649, 1073643521, 603906049, 268386305,
                      150958081, 67084289, 37730305, 16764929, 9427969,
                      4188161, 2354689, 1045505, 587521, 260609, 146305,
                      64769, 36289, 16001, 8929, 3905, 2161, 929, 505, 209,
                      109, 41, 19, 5, 1))
     else:
+        # Marcin Ciura's gap sequence (2001)
+        # Experimentaly derived. Best for less than 4000 elements arrays
         g = asarray((1750, 701, 301, 132, 57, 23, 10, 4, 1))
     w = 0
     for gg in g:
