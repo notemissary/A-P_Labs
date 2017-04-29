@@ -73,8 +73,10 @@ def insertion(arr):
             arr[j+1] = arr[j]
             j -= 1
             c += 2
+        else:
+            if j != i - 1:
+                s += 1
         arr[j+1] = x
-        s += 1
         c += 1
     return arr, c, s
 
@@ -158,8 +160,10 @@ def shell(arr, gaps):
                 arr[j] = arr[j-gap]
                 j -= gap
                 c += 2
+            else:
+                if j != i:
+                    s += 1
             arr[j] = val
-            s += 1
             c += 1
         c += 1
     return arr, c, s
