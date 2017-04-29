@@ -20,20 +20,20 @@ def bubble(arr):
     they are in the wrong order.
     
     :param arr: Takes an array.
-    :return: Returns sorted array, comparision and switch number.
+    :return: Returns sorted array, comparision and swap amount.
     """
     c = 0
-    e = 0
+    s = 0
     h = 0
     for j in range(len(arr)-1, 0, -1):
         for i in range(len(arr)-1-h):
             if arr[i] > arr[i+1]:
                 arr[i], arr[i+1] = arr[i+1], arr[i]
-                e += 1
+                s += 1
             c += 2
         c += 1
         h += 1
-    return arr, c, e
+    return arr, c, s
 
 
 def selection(arr):
@@ -42,17 +42,17 @@ def selection(arr):
     It is a sorting algorithm, specifically an in-place comparison sort.
     
     :param arr: Takes an array.
-    :return: Returns sorted array, comparsision number and switches number
+    :return: Returns sorted array, comparision number and swap amount.
     """
-    e = 0
+    s = 0
     c = 0
     for i in range(len(arr)):
         m = min(arr[i:])
         mi = where(arr[i:] == m)[0][0]
         arr[i+mi], arr[i] = arr[i], m
-        e += 1
+        s += 1
         c += 1
-    return arr, c, e
+    return arr, c, s
 
 
 def insertion(arr):
@@ -62,10 +62,10 @@ def insertion(arr):
     at a time.
     
     :param arr: Takes an array.
-    :return: Returns sorted array, comparision number and switch number.
+    :return: Returns sorted array, comparision number and swap amount.
     """
     c = 2
-    e = 0
+    s = 0
     for i in range(1, len(arr)):
         x = arr[i]
         j = i - 1
@@ -74,9 +74,9 @@ def insertion(arr):
             j -= 1
             c += 2
         arr[j+1] = x
-        e += 1
+        s += 1
         c += 1
-    return arr, c, e
+    return arr, c, s
 
 
 def shake(arr):
@@ -86,29 +86,48 @@ def shake(arr):
     and a comparison sort.
 
     :param arr: Takes an array.
-    :return: Returns sorted array, comparision number and switch number.
+    :return: Returns sorted array, comparision number and swap amount.
     """
     c = 1
-    e = 0
-    left = 0
-    right = len(arr) - 1
-    while left <= right:
-        for j in range(left, right):
+    s = 0
+    # left = 0
+    # right = len(arr) - 1
+    # while left <= right:
+    #     for j in range(left, right):
+    #         c += 2
+    #         if arr[j] > arr[j + 1]:
+    #             arr[j], arr[j + 1] = arr[j + 1], arr[j]
+    #             e += 1
+    #     right -= 1
+    #
+    #     for j in range(right, left, -1):
+    #         c += 2
+    #         if arr[j - 1] > arr[j]:
+    #             arr[j - 1], arr[j] = arr[j], arr[j - 1]
+    #             e += 1
+    #     left += 1
+    #
+    #     c += 1
+    for i in range(len(arr)-1, 0, -1):
+        c += 2
+        swapped = False
+        for j in range(i, 0, -1):
             c += 2
-            if arr[j] > arr[j + 1]:
-                arr[j], arr[j + 1] = arr[j + 1], arr[j]
-                e += 1
-        right -= 1
-
-        for j in range(right, left, -1):
-            c += 2
-            if arr[j - 1] > arr[j]:
-                arr[j - 1], arr[j] = arr[j], arr[j - 1]
-                e += 1
-        left += 1
-
+            if arr[j] < arr[j-1]:
+                arr[j], arr[j-1] = arr[j-1], arr[j]
+                s += 1
+                swapped = True
+        if not swapped:
+            return arr, c, s
         c += 1
-    return arr, c, e
+        for j in range(i):
+            c += 2
+            if arr[j] > arr[j+1]:
+                arr[j], arr[j+1] = arr[j+1], arr[j]
+                s += 1
+                swapped = True
+        if not swapped:
+            return arr, c, s
 
 
 def shellprep(lenarr):
@@ -145,10 +164,10 @@ def shell(arr, gaps):
 
     :param arr: Takes an array.
     :param gaps: Takes a gaps sequence.
-    :return: Returns sorted array, comparision number and switch number.
+    :return: Returns sorted array, comparision number and swap amount.
     """
     c = 2
-    e = 0
+    s = 0
     for gap in gaps:
         for i in range(gap, len(arr)):
             val = arr[i]
@@ -158,10 +177,10 @@ def shell(arr, gaps):
                 j -= gap
                 c += 2
             arr[j] = val
-            e += 1
+            s += 1
             c += 1
         c += 1
-    return arr, c, e
+    return arr, c, s
 
 
 def heap(arr):
@@ -174,13 +193,13 @@ def heap(arr):
     element and moving that to the sorted region.
 
     :param arr: Takes an array.
-    :return: Returns sorted array and comparision number
+    :return: Returns sorted array, comparision and swap amount.
     """
     c = 3
-    e = 0
+    s = 0
 
     def siftdown(array, start, ending):
-        nonlocal c, e
+        nonlocal c, s
         root = start
         child = (root << 1) + 1
         while child <= ending:
@@ -194,7 +213,7 @@ def heap(arr):
                 return array
             else:
                 array[root], array[swap] = array[swap], array[root]
-                e += 1
+                s += 1
                 root = swap
             child = (root << 1) + 1
 
@@ -212,11 +231,11 @@ def heap(arr):
     end = arrlen - 1
     while end > 0:
         arr[end], arr[0] = arr[0], arr[end]
-        e += 1
+        s += 1
         end -= 1
         siftdown(arr, 0, end)
         c += 1
-    return arr, c, e
+    return arr, c, s
 
 
 def randarr(num):
@@ -295,7 +314,7 @@ while True:
             res = bubble(A)
             t = time() - t
             print('Bubble sort: \nArray: \n{}\n'
-                  'Comparisions: {} | Exchanges: {}\n'
+                  'Comparisions: {} | Swaps: {}\n'
                   'Time: {:.6f} seconds'
                   '====================================================='
                   ''.format(res[0], res[1], res[2], t))
@@ -305,7 +324,7 @@ while True:
             res = selection(A)
             t = time() - t
             print('Selection sort: \nArray: \n{}\n'
-                  'Comparisions: {} | Exchanges: {}\n'
+                  'Comparisions: {} | Swaps: {}\n'
                   'Time: {:.6f} seconds'
                   '====================================================='
                   ''.format(res[0], res[1], res[2], t))
@@ -315,7 +334,7 @@ while True:
             res = insertion(A)
             t = time() - t
             print('Insertion sort: \nArray: \n{}\n'
-                  'Comparisions: {} | Exchanges: {}\n'
+                  'Comparisions: {} | Swaps: {}\n'
                   'Time: {:.6f} seconds'
                   '====================================================='
                   ''.format(res[0], res[1], res[2], t))
@@ -325,7 +344,7 @@ while True:
             res = shake(A)
             t = time() - t
             print('Cocktail shaker sort: \nArray: \n{}\n'
-                  'Comparisions: {} | Exchanges: {}\n'
+                  'Comparisions: {} | Swaps: {}\n'
                   'Time: {:.6f} seconds\n'
                   '====================================================='
                   ''.format(res[0], res[1], res[2], t))
@@ -336,7 +355,7 @@ while True:
             res = shell(A, gp)
             t = time() - t
             print('Shellsort: \nArray: \n{}\n'
-                  'Comparisions: {} | Exchanges: {}\n'
+                  'Comparisions: {} | Swaps: {}\n'
                   'Time: {:.6f} seconds\n'
                   '====================================================='
                   ''.format(res[0], res[1], res[2], t))
@@ -346,7 +365,7 @@ while True:
             res = heap(A)
             t = time() - t
             print('Heapsort: \nArray: \n{}\n'
-                  'Comparisions: {} | Exchanges: {}\n'
+                  'Comparisions: {} | Swaps: {}\n'
                   'Time: {:.6f} seconds\n'
                   '====================================================='
                   ''.format(res[0], res[1], res[2], t))
@@ -362,7 +381,7 @@ while True:
             t = time() - t
             print('=' * 75)
             print('Array: \n{}\n'
-                  'Comparisions: {} | Exchanges: {}\n'
+                  'Comparisions: {} | Swaps: {}\n'
                   'Time: {:.6f} seconds'
                   ''.format(res[0], res[1], res[2], t))
             print('=' * 75)
@@ -376,7 +395,7 @@ while True:
             t = time() - t
             print('=' * 75)
             print('Array: \n{}\n'
-                  'Comparisions: {} | Exchanges: {}\n'
+                  'Comparisions: {} | Swaps: {}\n'
                   'Time: {:.6f} seconds'
                   ''.format(res[0], res[1], res[2], t))
             print('=' * 75)
@@ -390,7 +409,7 @@ while True:
             t = time() - t
             print('=' * 75)
             print('Array: \n{}\n'
-                  'Comparisions: {} | Exchanges: {}\n'
+                  'Comparisions: {} | Swaps: {}\n'
                   'Time: {:.6f} seconds'
                   ''.format(res[0], res[1], res[2], t))
             print('=' * 75)
@@ -404,7 +423,7 @@ while True:
             t = time() - t
             print('=' * 75)
             print('Array: \n{}\n'
-                  'Comparisions: {} | Exchanges: {}\n'
+                  'Comparisions: {} | Swaps: {}\n'
                   'Time: {:.6f} seconds'
                   ''.format(res[0], res[1], res[2], t))
             print('=' * 75)
@@ -419,7 +438,7 @@ while True:
             t = time() - t
             print('=' * 75)
             print('Array: \n{}\n'
-                  'Comparisions: {} | Exchanges: {}\n'
+                  'Comparisions: {} | Swaps: {}\n'
                   'Time: {:.6f} seconds'
                   ''.format(res[0], res[1], res[2], t))
             print('=' * 75)
@@ -433,7 +452,7 @@ while True:
             t = time() - t
             print('=' * 75)
             print('Array: \n{}\n'
-                  'Comparisions: {} | Exchanges: {}\n'
+                  'Comparisions: {} | Swaps: {}\n'
                   'Time: {:.6f} seconds'
                   ''.format(res[0], res[1], res[2], t))
             print('=' * 75)
