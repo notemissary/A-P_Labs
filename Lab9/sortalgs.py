@@ -235,10 +235,11 @@ while True:
     choice = input('Would you want to fill the array yourself? [y/n]\n> '
                    '').lower()
     if choice == 'y':
+        lim = 30
         while True:
             try:
                 N = int(input('Input the length of the array: '))
-                if 0 < N <= 30:
+                if 0 < N <= lim:
                     A = empty(N, int)
                     for v in range(N):
                         while True:
@@ -257,10 +258,11 @@ while True:
                 continue
             break
     elif choice == 'n':
+        lim = 50000000
         while True:
             try:
                 integer = int(input('Input length of the array: '))
-                if 0 < integer <= 50000000:
+                if 0 < integer <= lim:
                     print('Generating the array...', end=' ')
                     A = randarr(integer)
                     if A is None:
@@ -268,7 +270,7 @@ while True:
                         continue
                     print('DONE!')
                     break
-                elif integer > 50000000:
+                elif integer > lim:
                     print('Error! Array is too long for this machine.')
                 else:
                     print('Error! Length MUST be positive number.')
