@@ -12,7 +12,7 @@ enable()
 print('DONE!\nInitializing functions...', end=' ')
 
 
-def bubble(arr):
+def bubble(arr, d):
     """
     Bubble sort
     It is a  sorting algorithm that repeatedly steps through the list to 
@@ -20,6 +20,7 @@ def bubble(arr):
     they are in the wrong order.
     
     :param arr: Takes an array.
+    :param d: Direction parameter.
     :return: Returns sorted array, comparision and swap amount.
     """
     c = 0
@@ -27,7 +28,10 @@ def bubble(arr):
     h = 0
     for j in range(len(arr)-1, 0, -1):
         for i in range(len(arr)-1-h):
-            if arr[i] > arr[i+1]:
+            if arr[i] > arr[i+1] and d == '1':
+                arr[i], arr[i+1] = arr[i+1], arr[i]
+                s += 1
+            elif arr[i] < arr[i+1] and d == '2':
                 arr[i], arr[i+1] = arr[i+1], arr[i]
                 s += 1
             c += 2
@@ -36,7 +40,7 @@ def bubble(arr):
     return arr, c, s
 
 
-def selection(arr):
+def selection(arr, d):
     """
     Selection sort
     It is a sorting algorithm, specifically an in-place comparison sort.
@@ -47,15 +51,20 @@ def selection(arr):
     s = 0
     c = 0
     for i in range(len(arr)):
-        m = min(arr[i:])
-        mi = where(arr[i:] == m)[0][0]
-        arr[i+mi], arr[i] = arr[i], m
+        if d == '1':
+            m = min(arr[i:])
+            mi = where(arr[i:] == m)[0][0]
+            arr[i+mi], arr[i] = arr[i], m
+        elif d == '2':
+            m = max(arr[:-i])
+            ma = where(arr[:-i] == m)[0][0]
+            arr[i-ma], arr[i] = arr[i], m
         s += 1
         c += 1
     return arr, c, s
 
 
-def insertion(arr):
+def insertion(arr, d):
     """
     Insertion sort
     It is a sorting algorithm that builds the final sorted array one item 
@@ -81,7 +90,7 @@ def insertion(arr):
     return arr, c, s
 
 
-def shake(arr):
+def shake(arr, d):
     """
     Cocktail shaker sort
     It is a variation of bubble sort that is both a stable sorting algorithm 
@@ -138,7 +147,7 @@ def shellprep(lenarr):
     return g[w:]
 
 
-def shell(arr, gaps):
+def shell(arr, gaps, d):
     """
     Shellsort
     It is an in-place comparison sort.
@@ -169,7 +178,7 @@ def shell(arr, gaps):
     return arr, c, s
 
 
-def heap(arr):
+def heap(arr, d):
     """
     Heapsort
     It is a comparison-based sorting algorithm. 
@@ -231,7 +240,7 @@ def randarr(num):
         return None
 
 print('DONE!\nReserving variables...', end=' ')
-res, gp = None, None
+res, gp, di = None, None, None
 print('DONE!\nSetting up print options...', end=' ')
 set_printoptions(threshold=10, edgeitems=4)
 
@@ -301,10 +310,20 @@ while True:
                    '9 - TEST \'EM ALL!\n'
                    '0 - Get back\n'
                    '> ').lower()
+        if ch != '9':
+            while True:
+                di = input('What direction?\n'
+                           '1 - Ascending\n'
+                           '2 - Descending\n'
+                           '> ')
+                if di == '1' or di == '2':
+                    break
+                else:
+                    print('No such direction')
         if ch == '1':
             print('=' * 75 + '\nOriginal array: \n{}'.format(A))
             t = time()
-            res = bubble(A)
+            res = bubble(A, di)
             t = time() - t
             print('Bubble sort sorted array: \n{}\n'
                   'Comparisions: {} | Swaps: {} | Time: {:.6f} seconds'
@@ -312,7 +331,7 @@ while True:
         elif ch == '2':
             print('=' * 75 + '\nOriginal array: \n{}'.format(A))
             t = time()
-            res = selection(A)
+            res = selection(A, di)
             t = time() - t
             print('Selection sort sorted array: \n{}\n'
                   'Comparisions: {} | Swaps: {} | Time: {:.6f} seconds'
@@ -320,7 +339,7 @@ while True:
         elif ch == '3':
             print('=' * 75 + '\nOriginal array: \n{}'.format(A))
             t = time()
-            res = insertion(A)
+            res = insertion(A, di)
             t = time() - t
             print('Insertion sort sorted array: \n{}\n'
                   'Comparisions: {} | Swaps: {} | Time: {:.6f} seconds'
@@ -328,7 +347,7 @@ while True:
         elif ch == '4':
             print('=' * 75 + '\nOriginal array: \n{}'.format(A))
             t = time()
-            res = shake(A)
+            res = shake(A, di)
             t = time() - t
             print('Cocktail shaker sort sorted array: \n{}\n'
                   'Comparisions: {} | Swaps: {} | Time: {:.6f} seconds'
@@ -337,7 +356,7 @@ while True:
             gp = shellprep(len(A))
             print('=' * 75 + '\nOriginal array: \n{}'.format(A))
             t = time()
-            res = shell(A, gp)
+            res = shell(A, gp, di)
             t = time() - t
             print('Shellsort sorted array: \n{}\n'
                   'Comparisions: {} | Swaps: {} | Time: {:.6f} seconds'
@@ -345,7 +364,7 @@ while True:
         elif ch == '6':
             print('=' * 75 + '\nOriginal array: \n{}'.format(A))
             t = time()
-            res = heap(A)
+            res = heap(A, di)
             t = time() - t
             print('Heapsort sorted array: \n{}\n'
                   'Comparisions: {} | Swaps: {} | Time: {:.6f} seconds'
@@ -353,8 +372,8 @@ while True:
         elif ch == '9':
             print('Woah! FIRE!!!')
             print('Initializing testing arrays...', end=' ')
-            BCA = WCD = arange(N)
-            WCA = BCD = arange(N - 1, -1, -1)
+            BCA = arange(N)
+            WCA = arange(N - 1, -1, -1)
             print('DONE!\n\nOriginal arrays:\n'
                   'Random array: \n{}\n'
                   'Best case array: \n{}\n'
@@ -365,7 +384,17 @@ while True:
             collect()
             print('DONE!\n\nBubble sort')
             t = time()
-            res = bubble(deepcopy(A))
+            res = bubble(deepcopy(A), '1')
+            t = time() - t
+            print('=' * 75)
+            print('Random array: \n{}\n'
+                  'Comparisions: {} | Swaps: {} | Time: {:.6f} seconds'
+                  '\n'.format(res[0], res[1], res[2], t))
+            del res
+            collect()
+            print('DONE!\n\nBubble sort')
+            t = time()
+            res = bubble(deepcopy(A), '2')
             t = time() - t
             print('=' * 75)
             print('Random array: \n{}\n'
@@ -374,7 +403,7 @@ while True:
             del res
             collect()
             t = time()
-            res = bubble(deepcopy(BCA))
+            res = bubble(deepcopy(BCA), '1')
             t = time() - t
             print('Best case array: \n{}\n'
                   'Comparisions: {} | Swaps: {} | Time: {:.6f} seconds'
@@ -382,7 +411,7 @@ while True:
             del res
             collect()
             t = time()
-            res = bubble(deepcopy(WCA))
+            res = bubble(deepcopy(WCA), '1')
             t = time() - t
             print('Worst case array: \n{}\n'
                   'Comparisions: {} | Swaps: {} | Time: {:.6f} seconds'
@@ -394,7 +423,17 @@ while True:
             collect()
             print('DONE!\n\nSelection sort')
             t = time()
-            res = selection(deepcopy(A))
+            res = selection(deepcopy(A), '1')
+            t = time() - t
+            print('=' * 75)
+            print('Array: \n{}\n'
+                  'Comparisions: {} | Swaps: {} | Time: {:.6f} seconds'
+                  '\n'.format(res[0], res[1], res[2], t))
+            del res
+            collect()
+            print('DONE!\n\nSelection sort')
+            t = time()
+            res = selection(deepcopy(A), '2')
             t = time() - t
             print('=' * 75)
             print('Array: \n{}\n'
@@ -403,7 +442,7 @@ while True:
             del res
             collect()
             t = time()
-            res = selection(deepcopy(BCA))
+            res = selection(deepcopy(BCA), '1')
             t = time() - t
             print('Best case array: \n{}\n'
                   'Comparisions: {} | Swaps: {} | Time: {:.6f} seconds'
@@ -411,7 +450,7 @@ while True:
             del res
             collect()
             t = time()
-            res = selection(deepcopy(WCA))
+            res = selection(deepcopy(WCA), '1')
             t = time() - t
             print('Worst case array: \n{}\n'
                   'Comparisions: {} | Swaps: {} | Time: {:.6f} seconds'
@@ -423,7 +462,17 @@ while True:
             collect()
             print('DONE!\n\nInsertion sort')
             t = time()
-            res = insertion(deepcopy(A))
+            res = insertion(deepcopy(A), '1')
+            t = time() - t
+            print('=' * 75)
+            print('Random array: \n{}\n'
+                  'Comparisions: {} | Swaps: {} | Time: {:.6f} seconds'
+                  '\n'.format(res[0], res[1], res[2], t))
+            del res
+            collect()
+            print('DONE!\n\nInsertion sort')
+            t = time()
+            res = insertion(deepcopy(A), '2')
             t = time() - t
             print('=' * 75)
             print('Random array: \n{}\n'
@@ -432,7 +481,7 @@ while True:
             del res
             collect()
             t = time()
-            res = insertion(deepcopy(BCA))
+            res = insertion(deepcopy(BCA), '1')
             t = time() - t
             print('Best case array: \n{}\n'
                   'Comparisions: {} | Swaps: {} | Time: {:.6f} seconds'
@@ -440,7 +489,7 @@ while True:
             del res
             collect()
             t = time()
-            res = insertion(deepcopy(WCA))
+            res = insertion(deepcopy(WCA), '1')
             t = time() - t
             print('Worst case array: \n{}\n'
                   'Comparisions: {} | Swaps: {} | Time: {:.6f} seconds'
@@ -452,7 +501,17 @@ while True:
             collect()
             print('DONE!\n\nCocktail shaker sort')
             t = time()
-            res = shake(deepcopy(A))
+            res = shake(deepcopy(A), '1')
+            t = time() - t
+            print('=' * 75)
+            print('Random array: \n{}\n'
+                  'Comparisions: {} | Swaps: {} | Time: {:.6f} seconds'
+                  '\n'.format(res[0], res[1], res[2], t))
+            del res
+            collect()
+            print('DONE!\n\nCocktail shaker sort')
+            t = time()
+            res = shake(deepcopy(A), '2')
             t = time() - t
             print('=' * 75)
             print('Random array: \n{}\n'
@@ -461,7 +520,7 @@ while True:
             del res
             collect()
             t = time()
-            res = shake(deepcopy(BCA))
+            res = shake(deepcopy(BCA), '1')
             t = time() - t
             print('Best case array: \n{}\n'
                   'Comparisions: {} | Swaps: {} | Time: {:.6f} seconds'
@@ -469,7 +528,7 @@ while True:
             del res
             collect()
             t = time()
-            res = shake(deepcopy(WCA))
+            res = shake(deepcopy(WCA), '1')
             t = time() - t
             print('Worst case array: \n{}\n'
                   'Comparisions: {} | Swaps: {} | Time: {:.6f} seconds'
@@ -482,7 +541,18 @@ while True:
             print('DONE!\n\nShellsort')
             gp = shellprep(len(A))
             t = time()
-            res = shell(deepcopy(A), gp)
+            res = shell(deepcopy(A), gp, '1')
+            t = time() - t
+            print('=' * 75)
+            print('Random array: \n{}\n'
+                  'Comparisions: {} | Swaps: {} | Time: {:.6f} seconds'
+                  '\n'.format(res[0], res[1], res[2], t))
+            del res
+            collect()
+            print('DONE!\n\nShellsort')
+            gp = shellprep(len(A))
+            t = time()
+            res = shell(deepcopy(A), gp, '1')
             t = time() - t
             print('=' * 75)
             print('Random array: \n{}\n'
@@ -492,7 +562,7 @@ while True:
             collect()
             gp = shellprep(len(BCA))
             t = time()
-            res = shell(deepcopy(BCA), gp)
+            res = shell(deepcopy(BCA), gp, '1')
             t = time() - t
             print('Best case array: \n{}\n'
                   'Comparisions: {} | Swaps: {} | Time: {:.6f} seconds'
@@ -501,7 +571,7 @@ while True:
             collect()
             gp = shellprep(len(WCA))
             t = time()
-            res = shell(deepcopy(WCA), gp)
+            res = shell(deepcopy(WCA), gp, '1')
             t = time() - t
             print('Worst case array: \n{}\n'
                   'Comparisions: {} | Swaps: {} | Time: {:.6f} seconds'
@@ -513,7 +583,17 @@ while True:
             collect()
             print('DONE!\n\nHeapsort')
             t = time()
-            res = heap(deepcopy(A))
+            res = heap(deepcopy(A), '1')
+            t = time() - t
+            print('=' * 75)
+            print('Array: \n{}\n'
+                  'Comparisions: {} | Swaps: {} | Time: {:.6f} seconds'
+                  '\n'.format(res[0], res[1], res[2], t))
+            del res
+            collect()
+            print('DONE!\n\nHeapsort')
+            t = time()
+            res = heap(deepcopy(A), '2')
             t = time() - t
             print('=' * 75)
             print('Array: \n{}\n'
@@ -522,7 +602,7 @@ while True:
             del res
             collect()
             t = time()
-            res = heap(deepcopy(BCA))
+            res = heap(deepcopy(BCA), '1')
             t = time() - t
             print('Best case array: \n{}\n'
                   'Comparisions: {} | Swaps: {} | Time: {:.6f} seconds'
@@ -530,7 +610,7 @@ while True:
             del res
             collect()
             t = time()
-            res = heap(deepcopy(WCA))
+            res = heap(deepcopy(WCA), '1')
             t = time() - t
             print('Worst case array: \n{}\n'
                   'Comparisions: {} | Swaps: {} | Time: {:.6f} seconds'
@@ -538,7 +618,7 @@ while True:
             print('=' * 75)
 
             print('Collecting garbage...', end=' ')
-            del res, A, BCA, BCD, WCA, WCD, t
+            del res, A, BCA, WCA, t
             collect()
             print('DONE!')
             pass
