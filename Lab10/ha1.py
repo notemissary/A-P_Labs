@@ -1,48 +1,59 @@
 # Дыма Владимир. КНИТ16-А
-from sys import setrecursionlimit
-setrecursionlimit(10000)
+from sys import setrecursionlimit, getrecursionlimit
+i = 1001
+while True:
+    try:
+        setrecursionlimit(i)
+        i += 100
+    except OverflowError:
+        setrecursionlimit(i-100)
+        break
+print('Recursion limit set to {}'.format(getrecursionlimit()))
+lvl = None
 
 
-def Ar(n, m):
+def Ar(m, n, level=0):
     """
     Recursive Ackermann function.
     
-    :param n: The first element.
-    :param m: The second element.
+    :param m: The first element.
+    :param n: The second element.
     :return: Number.
     """
-    if n == 0:
-        return m + 1
-    if n > 0 and m == 0:
-        return Ar(n-1, 1)
-    return Ar(n-1, Ar(n, m-1))
+    global lvl
+    if m == 0:
+        return n + 1
+    if m > 0 and n == 0:
+        return Ar(m-1, 1, level=level+1)
+    lvl = level
+    return Ar(m-1, Ar(m, n-1, level=level+1), level=level+1)
 
 
-def Ai(n, m):
+def Ai(m, n):
     """
     Iterative Ackermann function.
     
-    :param n: The first element.
-    :param m: The second element.
+    :param m: The first element.
+    :param n: The second element.
     :return: Number.
     """
     stack = []
     while True:
-        if not n:
+        if not m:
             if not stack:
-                return m + 1
-            n, m = stack.pop(), m + 1
-        elif not m:
-            n, m = n - 1, 1
+                return n + 1
+            m, n = stack.pop(), n + 1
+        elif not n:
+            m, n = m - 1, 1
         else:
-            stack.append(n - 1)
-            m -= 1
+            stack.append(m - 1)
+            n -= 1
 
 
 while True:
     n, m = int(input('Input n[less than 5]: ')), int(input('m: '))
-    if n >= 4 and m >1:
+    if n >= 2 and m > 4:
         print('Stuck would overflow! Input the other numbers.')
         continue
-    print(Ar(n, m))
-    print(Ai(n, m))
+    print('Result: {}. Recursion depth: {}'.format(Ar(m, n), lvl))
+    print('Result: {}'.format(Ai(m, n)))

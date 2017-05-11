@@ -1,8 +1,6 @@
 import os
-# os.chdir('D:/PyHub')
-# os.chdir('D:/PyHub/AP-Labs')
-# os.chdir('D:/PyHub/AP-Labs/Lab11')
-os.chdir('D:/PyHub/AP-Labs/Lab11/Anketa')
+os.chdir('D:/NewFold')
+os.chdir('D:/NewFold/Anketa')
 print('We\'re here now: {}'.format(os.getcwd()))
 ans = []
 while True:
@@ -12,7 +10,7 @@ while True:
         print('Please input name!')
         continue
     age = input('How old are you?\n'
-                 '> ')
+                '> ')
     if int(age) not in range(10, 101):
         print('You\'re too young or too old! Call someone else to take the '
               'test :)')
