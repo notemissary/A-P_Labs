@@ -10,8 +10,6 @@ def tr(text):
     text = text.replace('.', '')
     if text.isdigit():
         return text
-    # text = text.split()
-    # print(text)
     a = ''
     for i in range(len(text)):
         if text[i].isdigit():
@@ -37,7 +35,3 @@ def tr(text):
     return res
 
 print(tr(input('=')))
-
-# sign = '+' | '-' | '*'
-# digit = '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9'
-# formula = digit {digit} | (formula sign formula)
