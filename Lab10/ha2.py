@@ -6,14 +6,15 @@
 #          2304, 2590, 2910, 3264, 3658, 4097, 4582, 5120, 5718, 6378]
 #     return a[n]-1
 
+
 def func_r(n):
-    res = []
     def p(n, k):
         if n == 0 and k == 0:
             return 1
         if n <= 0 or k <= 0:
             return 0
         return p(n-k, k) + p(n-1, k-1)
+    res = []
     if n == 0 or n == 1:
         return 0
     for i in range(1, n):
@@ -21,9 +22,6 @@ def func_r(n):
     return max(res)
 
 while True:
-    d = []
     n = int(input('n: '))
-    # print(func(n))
-    print(func(n))
     print(func_r(n))
 
