@@ -8,7 +8,20 @@
 
 
 def func_r(n):
+    """
+    Counts number of possible distinct partitions of a given number.
+    
+    :param n: A number.
+    :return: Returns amount of possible distinct partitions.
+    """
     def p(n, k):
+        """
+        Minor counter.
+        
+        :param n: Number.
+        :param k: Iteration number.
+        :return: Sum.
+        """
         if n == 0 and k == 0:
             return 1
         if n <= 0 or k <= 0:
@@ -22,6 +35,5 @@ def func_r(n):
     return max(res)
 
 while True:
-    n = int(input('n: '))
-    print(func_r(n))
-
+    n = int(input('Input n: '))
+    print('Number of distinct parts: {}'.format(func_r(n)))

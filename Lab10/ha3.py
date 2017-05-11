@@ -4,6 +4,12 @@ digit = {range(10)}
 
 
 def tr(text):
+    """
+    Simple text calculator.
+    
+    :param text: Takes text.
+    :return: Returns calculated result.
+    """
     num = []
     sgn = []
     res = 0
@@ -31,7 +37,11 @@ def tr(text):
             res -= num[i+1]
         else:
             res *= num[i+1]
-
     return res
 
-print(tr(input('=')))
+while True:
+    t = input('=')
+    if t[0] in sign or t[-1] in sign:
+        print('Start with an integer and end with it.')
+        continue
+    print('Result: {}'.format(tr(t)))
