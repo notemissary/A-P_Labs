@@ -1,3 +1,4 @@
+# Дыма Владимир. КНИТ16-А
 from numpy import empty, ndarray, reshape
 
 

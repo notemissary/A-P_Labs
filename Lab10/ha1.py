@@ -1,13 +1,14 @@
+# Дыма Владимир. КНИТ16-А
 from sys import setrecursionlimit
 setrecursionlimit(10000)
 
 
-def A(n, m):
+def Ar(n, m):
     if n == 0:
         return m + 1
     if n > 0 and m == 0:
-        return A(n-1, 1)
-    return A(n-1, A(n, m-1))
+        return Ar(n-1, 1)
+    return Ar(n-1, Ar(n, m-1))
 
 
 def Ai(n, m):
@@ -24,8 +25,7 @@ def Ai(n, m):
             m -= 1
 
 
-
 while True:
     n, m = int(input('n: ')), int(input('m: '))
-    print(A(n, m))
+    print(Ar(n, m))
     print(Ai(n, m))

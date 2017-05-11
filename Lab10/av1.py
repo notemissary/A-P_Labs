@@ -1,3 +1,4 @@
+# Дыма Владимир. КНИТ16-А
 def Nod_i(n, m):
     while m != 0 and n != 0:
         if n > m:
