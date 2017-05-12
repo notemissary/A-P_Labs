@@ -4,20 +4,20 @@ def func(n):
          64, 76, 89, 104, 122, 142, 165, 192, 222, 256, 296, 340, 390, 448,
          512, 585, 668, 760, 864, 982, 1113, 1260, 1426, 1610, 1816, 2048,
          2304, 2590, 2910, 3264, 3658, 4097, 4582, 5120, 5718, 6378]
-    return a[n]-1
+    return a[n]
 
 
 def func_r(n):
     """
     Counts number of possible distinct partitions of a given number.
-    
+
     :param n: A number.
     :return: Returns amount of possible distinct partitions.
     """
     def p(n, k):
         """
         Minor counter.
-        
+
         :param n: Number.
         :param k: Iteration number.
         :return: Sum.
@@ -33,6 +33,7 @@ def func_r(n):
     for i in range(1, n):
         res.append(p(n, i))
     return max(res)
+
 
 while True:
     n = int(input('Input n: '))
