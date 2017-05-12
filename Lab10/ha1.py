@@ -1,6 +1,7 @@
 # Дыма Владимир. КНИТ16-А
 from sys import setrecursionlimit, getrecursionlimit
 i = 1001
+print('Setting the maximum recursion limit...')
 while True:
     try:
         setrecursionlimit(i)
@@ -21,12 +22,12 @@ def Ar(m, n, level=0):
     :return: Number.
     """
     global lvl
+    lvl = level
     if m == 0:
         return n + 1
     if m > 0 and n == 0:
-        return Ar(m-1, 1, level=level+1)
-    lvl = level
-    return Ar(m-1, Ar(m, n-1, level=level+1), level=level+1)
+        return Ar(m-1, 1, level=lvl+1)
+    return Ar(m-1, Ar(m, n-1, level=lvl+1), level=lvl+1)
 
 
 def Ai(m, n):
@@ -51,9 +52,13 @@ def Ai(m, n):
 
 
 while True:
-    n, m = int(input('Input n[less than 5]: ')), int(input('m: '))
-    if n >= 2 and m > 4:
-        print('Stuck would overflow! Input the other numbers.')
-        continue
-    print('Result: {}. Recursion depth: {}'.format(Ar(m, n), lvl))
-    print('Result: {}'.format(Ai(m, n)))
+    try:
+        n, m = int(input('Input n: ')), int(input('Input m[less than 5]: '))
+        if n >= 2 and m >= 4:
+            print('Stuck would overflow! Input the other numbers.')
+            continue
+        # print('Result of iterations: {}'.format(Ai(m, n)))
+        print('Result of recrustion: {}. Recursion depth: {}'
+              ''.format(Ar(m, n), lvl))
+    except ValueError:
+        print('ERR204: Try again!')

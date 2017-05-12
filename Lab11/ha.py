@@ -2,29 +2,23 @@
 import numpy as np
 
 
-def dijkstra(s, n, a):
-    wt_bool = [True] * n  # принадлежности элемента множеству wt
-    wt = [50] * n  # множество посещённых вершин
-    wt[s] = 0  # установка нулевого(начального) элемента
-    for i in range(n):
-        min_wt = 51  # максимально возможное число длины пути
-        id_min_wt = -1  # индекс минимального расстояния
-        for j in range(len(wt)):
-            if wt_bool[j] and wt[j] < min_wt:
-                min_wt = wt[j]
-                id_min_wt = j
-        for j in range(n):
-            if wt[id_min_wt] + a[id_min_wt][j] < wt[j]:
-                wt[j] = wt[id_min_wt] + a[id_min_wt][j]
-        wt_bool[id_min_wt] = False
-    return wt
+def dijkstra(N, S, matrix):
+    valid = [True]*N
+    weight = [1000000]*N
+    weight[S] = 0
+    for i in range(N):
+        min_weight = 1000001
+        ID_min_weight = -1
+        for i in range(len(weight)):
+            if valid[i] and weight[i] < min_weight:
+                min_weight = weight[i]
+                ID_min_weight = i
+        for i in range(N):
+            if weight[ID_min_weight] + matrix[ID_min_weight][i] < weight[i]:
+                weight[i] = weight[ID_min_weight] + matrix[ID_min_weight][i]
+        valid[ID_min_weight] = False
+    return weight
 
-# d = dijkstra(1, len(a), a)
-# print(d)
-# for i in range(len(d)):
-#     if i == 1:
-#         continue
-#     print('Len from city 2 to city {} → {}'.format(i+1, d[i]))
 
 while True:
     try:
