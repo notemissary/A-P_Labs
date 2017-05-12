@@ -24,7 +24,7 @@ while True:
     try:
         num_cities = int(input('Please enter the amount of cities\n> '))
         if num_cities < 2:
-            print('The amount of cities can not be less than 2!\n')
+            print('The amount of cities can not be  less than 2!\n')
             continue
     except ValueError:
         print('Please enter integer number!\n')
